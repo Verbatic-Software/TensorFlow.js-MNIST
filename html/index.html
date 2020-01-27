@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.0/dist/tf.min.js"></script>
+  <script src="https://unpkg.com/konva@4.1.2/konva.min.js"></script>
+  <script src="/js/canvas.js"></script>
+  <script src="/js/predict.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="text/html; charset=utf-8">
+  <title>Labs | MNIST</title>
+
+  <link href="css/main.css" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@1.1.4/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,700,900&display=swap" rel="stylesheet"
+    async>
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,300,400&display=swap" rel="stylesheet" async>
+
+  <script type="text/javascript">
+    let model = null
+    // Lets load our model via a HTTP call
+    tf.loadLayersModel('http://localhost:3000/model/model.json').then((_model) => {
+      model = _model
+    })
+
+  </script>
+</head>
+
+<body class="bg-gray-100 min-h-screen" onload="initCanvas()">
+  <section class="py-10 shadow-inner content">
+    <div class="max-w-6xl p-8 mx-auto bg-white shadow article">
+
+      <hr>
+
+      <!-- Interactive -->
+      <div class="pt-2 content">
+        <h2 class="text-3xl font-thick text-heading text-center">Test for yourself</h2>
+        <p class="hidden md:block">Draw a number in the middle of the block on the left and click "Test". The AI will
+          then try to classify your number and display it's result on the right.</p>
+        <p class="block md:hidden">Draw a number in the middle of the block on the top and click "Test". The AI will
+          then try to classify your number and display it's result on the bottom.</p>
+        <p>Tip: For best results, make sure your number is in the center of the block.</p>
+        <div class="flex flex-wrap pt-2">
+
+          <div class="w-full md:w-1/2 pb-4 text-center">
+            <h2 class="text-2xl font-thick">Draw a number.</h2>
+
+            <div class="canvas-wrapper">
+              <div id="container"> </div>
+              <div class="w-full">
+                <button class="font-bold py-2 border-2 w-1/2" onclick="extractImage()">
+                  Classify
+                </button><button class="font-bold border-2 py-2 w-1/2" onclick="resetCanvas()">
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full pb-4 md:w-1/2 text-center">
+            <h2 class="text-2xl font-thick">The Result.</h2>
+
+            <div class="latest-wrapper">
+              <img id="latest-image" class="standard-img" />
+              <p id="latest-label" class="font-bold py-2 w-full b-0 text-center border-2">
+                Waiting for classification
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="pred-list" class="hidden">
+          <h2 class="text-2xl font-thick text-center pb-4">Your previous predictions.</h2>
+
+          <div id="history-list" class="flex flex-row flex-wrap"></div>
+        </div>
+      </div>
+
+      <hr>
+
+    </div>
+  </section>
+
+  <!-- Column -->
+  <section class="flex justify-center shadow-inner bg-gray-200">
+    <p>Built By <a href="https://verbatic.io" target="_blank" rel="noopener">Verbatic</a></p>
+  </section>
+</body>
+
+</html>

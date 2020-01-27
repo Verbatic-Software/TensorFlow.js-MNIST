@@ -1,0 +1,41 @@
+body {
+  color: #142236;
+  font-family: "Montserrat", sans-serif;
+}
+
+.text-heading {
+  font-family: "Work Sans", sans-serif;
+  letter-spacing: 0.025em;
+}
+
+.content {
+  font-family: "Open Sans", sans-serif;
+  text-rendering: optimizeLegibility;
+  font-weight: 300;
+  font-size: 1.1rem;
+}
+
+.content > p {
+  margin: 1.5em 0 0 0;
+}
+
+.min-h-screen {
+  height: 100vh;
+}
+
+.latest-wrapper {
+  width: 200px;
+  margin: auto;
+}
+
+.standard-img {
+  width: 200px;
+  height: 200px;
+  background-color: black;
+}
+
+.canvas-wrapper {
+  width: 200px;
+  max-width: 200px;
+  margin: auto;
+}
